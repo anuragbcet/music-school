@@ -57,7 +57,7 @@ export const WavyBackground = ({
       w = ctx.canvas.width = window.innerWidth;
       h = ctx.canvas.height = window.innerHeight;
       ctx.filter = `blur(${blur}px)`;
-    };
+    },[animationId];
     render();
   };
 

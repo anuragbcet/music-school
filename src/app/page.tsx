@@ -1,7 +1,7 @@
 import Featuredcourses from "@/components/Featuredcourses";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import { InfiniteMoving } from "@/components/InfiniteMoving";
+import {InfiniteMoving }from "@/components/InfiniteMoving";
 import Instructors from "@/components/Instructors";
 import UpcomingWebinar from "@/components/UpcomingWebinar";
 import Image from "next/image";
