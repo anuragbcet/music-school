@@ -36,7 +36,7 @@ export const InfiniteMovingCards = ({
         if (scrollerRef.current) {
           scrollerRef.current.appendChild(duplicatedItem);
         }
-      }),[addAnimation];
+      },[addAnimation]);
 
       getDirection();
       getSpeed();
@@ -119,3 +119,4 @@ export const InfiniteMovingCards = ({
     </div>
   );
 };
+

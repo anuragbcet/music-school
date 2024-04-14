@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/utils/cn";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
@@ -57,7 +57,7 @@ export const WavyBackground = ({
       w = ctx.canvas.width = window.innerWidth;
       h = ctx.canvas.height = window.innerHeight;
       ctx.filter = `blur(${blur}px)`;
-    },[animationId];
+    };
     render();
   };
 
@@ -85,7 +85,7 @@ export const WavyBackground = ({
 
   let animationId: number;
   const render = () => {
-    ctx.fillStyle = backgroundFill || "white";
+    ctx.fillStyle = backgroundFill || "black";
     ctx.globalAlpha = waveOpacity || 0.5;
     ctx.fillRect(0, 0, w, h);
     drawWave(5);
@@ -97,7 +97,17 @@ export const WavyBackground = ({
     return () => {
       cancelAnimationFrame(animationId);
     };
-  }, [init]);
+  }, []);
+
+  const [isSafari, setIsSafari] = useState(false);
+  useEffect(() => {
+    // I'm sorry but i have got to support it on safari.
+    setIsSafari(
+      typeof window !== "undefined" &&
+        navigator.userAgent.includes("Safari") &&
+        !navigator.userAgent.includes("Chrome")
+    );
+  }, []);
 
   return (
     <div
@@ -110,6 +120,9 @@ export const WavyBackground = ({
         className="absolute inset-0 z-0"
         ref={canvasRef}
         id="canvas"
+        style={{
+          ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
+        }}
       ></canvas>
       <div className={cn("relative z-10", className)} {...props}>
         {children}
@@ -117,3 +130,4 @@ export const WavyBackground = ({
     </div>
   );
 };
+
